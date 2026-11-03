@@ -1,0 +1,63 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+
+# Arquivos gerados pelo Maven
+target/
+
+# Configurações locais das IDEs
+.vscode/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Logs
+*.log
+logs/
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Credenciais privadas do Firebase
+serviceAccountKey.json
+*firebase-adminsdk*.json
+*service-account*.json
+
+# Configurações locais com informações sensíveis
+application-local.properties
+application-secrets.properties
