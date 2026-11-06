@@ -246,3 +246,13 @@ O botão **ZERAR TESTES** fica disponível somente quando existem votos registra
 
 Os resultados anteriores ficam arquivados na subcoleção `rodadas` do Firestore.
 
+
+2. Configurar o Firebase
+
+Acesse o Firebase Console e selecione seu projeto.
+
+Em Configurações do projeto → Contas de serviço, gere uma chave privada para o Firebase Admin SDK.
+
+Guarde o arquivo JSON em uma pasta privada, fora do repositório, por exemplo:
+
+C:\chaves\votoverso-firebase.json
