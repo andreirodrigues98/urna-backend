@@ -17,6 +17,17 @@ public class SessaoVotacao {
         this.votoPresidente = null;
     }
 
+    /** Reconstrói uma sessão persistida, sem alterar o registro no Firebase. */
+    public static SessaoVotacao restaurar(UUID id, EtapaVotacao etapa) {
+        if (id == null || etapa == null) throw new IllegalArgumentException("ID/etapa obrigatórios.");
+        return new SessaoVotacao(id, etapa);
+    }
+
+    private SessaoVotacao(UUID id, EtapaVotacao etapa) {
+        this.id = id;
+        this.etapa = etapa;
+    }
+
     // GETTERS
     public UUID getId() {
         return id;

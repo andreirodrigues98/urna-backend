@@ -14,6 +14,7 @@ import br.com.urnacidada.urna_backend.model.SessaoVotacao;
 import br.com.urnacidada.urna_backend.model.TipoVoto;
 import br.com.urnacidada.urna_backend.model.Voto;
 import br.com.urnacidada.urna_backend.service.VotacaoService;
+import br.com.urnacidada.urna_backend.repository.RepositorioIndisponivelException;
 
 @RestController
 @RequestMapping("/api/votacao")
@@ -101,22 +102,15 @@ public class VotacaoController {
 
         validarDados(dados);
 
-        Voto voto = service.confirmarVoto(
-            id,
-            dados.cargo(),
-            dados.numero(),
-            dados.branco()
-        );
-
-        SessaoVotacao sessao = service.buscarSessao(id);
-
+        // O Firestore já devolve o estado pós-confirmação na mesma transação.
+        var confirmacao = service.confirmarVoto(id, dados.cargo(), dados.numero(), dados.branco());
         return new ResultadoConfirmacao(
-            sessao.getId(),
-            voto.getCargo(),
-            voto.getTipoVoto(),
-            sessao.getEtapa(),
-            sessao.isFinalizada(),
-            service.contarVotosConfirmados()
+            id,
+            confirmacao.voto().getCargo(),
+            confirmacao.voto().getTipoVoto(),
+            confirmacao.proximaEtapa(),
+            confirmacao.proximaEtapa() == EtapaVotacao.FINALIZADA,
+            confirmacao.totalConfirmados()
         );
     }
 
@@ -172,6 +166,12 @@ public class VotacaoController {
 
         return ResponseEntity
             .status(HttpStatus.CONFLICT)
+            .body(Map.of("erro", erro.getMessage()));
+    }
+
+    @ExceptionHandler(RepositorioIndisponivelException.class)
+    public ResponseEntity<Map<String, String>> tratarFirestore(RepositorioIndisponivelException erro) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
             .body(Map.of("erro", erro.getMessage()));
     }
 

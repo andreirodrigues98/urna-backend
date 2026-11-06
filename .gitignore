@@ -61,3 +61,17 @@ serviceAccountKey.json
 # Configurações locais com informações sensíveis
 application-local.properties
 application-secrets.properties
+# Segurança Firebase / credenciais
+*serviceAccount*.json
+*firebase-adminsdk*.json
+firebase-key.json
+secrets/
+.env
+# Credenciais em arquivos com nomes diferentes
+*credentials*.json
+*credencial*.json
+*private-key*.json
+*.pem
+
+# Chave local do projeto VotoVerso (manter fora do repositório)
+votoverso-firebase.json
