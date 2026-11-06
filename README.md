@@ -1,258 +1,211 @@
-# VotoVerso — O Multiverso Vai às Urnas 🗳️
+# 🗳️ VotoVerso — O Multiverso Vai às Urnas
 
-**Simulador educativo de votação eletrônica desenvolvido em Java 21, com interface Swing, API REST em Spring Boot e persistência de dados no Firebase Cloud Firestore.**
+## Sobre o projeto
 
-O VotoVerso é um projeto acadêmico da disciplina de Programação Orientada a Objetos (POO). Seu objetivo é demonstrar, de forma interativa, o funcionamento básico de uma urna eletrônica, permitindo que estudantes realizem uma eleição simulada com personagens fictícios dos universos Marvel e DC.
+O **VotoVerso** é um simulador educativo de urna eletrônica desenvolvido na disciplina de **Programação Orientada a Objetos (POO)**.
 
-O projeto possui duas etapas de votação: **Deputado Federal** e **Presidente**.
+A aplicação utiliza **Java 21**, interface gráfica **Java Swing**, backend **Spring Boot** e banco de dados **Firebase Cloud Firestore**.
 
-> **Aviso:** esta aplicação é exclusivamente educativa. Não possui vínculo com eleições reais e não deve ser utilizada para processos eleitorais oficiais.
+O objetivo é demonstrar, de forma prática e interativa, o funcionamento de uma votação eletrônica, usando personagens dos universos Marvel e DC.
 
-## Funcionalidades
-
-- Interface gráfica desktop desenvolvida com Java Swing.
-- Teclado numérico e botões BRANCO, CORRIGE e CONFIRMA.
-- Votação sequencial para deputado federal e presidente.
-- Exibição do nome, partido, número e fotografia dos candidatos.
-- Exibição do vice-presidente da chapa.
-- Prévia rápida dos candidatos.
-- Animação de gravação do voto e tela FIM.
-- Zerésima para registrar a abertura da eleição com zero votos.
-- Persistência dos votos e das sessões no Firebase Cloud Firestore.
-- Votos válidos, brancos e nulos.
-- Apuração final com contagem e identificação dos vencedores.
-- Exibição das fotos dos vencedores na apuração.
-- Apuração com apenas texto quando houver empate.
-- Bloqueio de novas votações após o encerramento.
-- Função ZERAR TESTES, com autenticação administrativa e histórico das rodadas.
-- Testes automatizados com JUnit.
-
-## Partidos e candidatos
+A votação possui duas etapas: **Deputado Federal** e **Presidente**.
 
 | Partido | Deputado Federal | Presidente | Vice-presidente |
 |---|---|---|---|
-| Partido Marvel (PM) | Homem-Aranha — 7101 | Homem de Ferro — 71 | Thor |
-| Partido DC (PDC) | Mulher-Maravilha — 7201 | Superman — 72 | Batman |
+| Marvel (PM) | Homem-Aranha (`7101`) | Homem de Ferro (`71`) | Thor |
+| DC (PDC) | Mulher-Maravilha (`7201`) | Superman (`72`) | Batman |
 
-Os personagens são utilizados apenas na simulação educativa. As imagens e os personagens pertencem aos respectivos titulares de direitos autorais.
+A urna permite registrar votos válidos, brancos e nulos, corrigir escolhas, visualizar os candidatos, emitir a **zerésima**, realizar a **apuração final** e salvar os votos no Firebase.
 
-## Tecnologias utilizadas
+O sistema também permite reiniciar os testes, preservando o histórico das rodadas anteriores.
 
-| Tecnologia | Utilização |
-|---|---|
-| Java 21 | Linguagem principal |
-| Java Swing / Java2D | Interface gráfica |
-| Spring Boot 4.1.2 | API REST e regras de negócio |
-| Firebase Cloud Firestore | Persistência dos dados |
-| Firebase Admin SDK | Comunicação segura do backend com o Firebase |
-| Maven | Gerenciamento das dependências |
-| JUnit 5 | Testes automatizados |
-| Git e GitHub | Versionamento e publicação do código |
+> **Aviso:** o VotoVerso é uma aplicação exclusivamente educativa, sem vínculo com eleições reais. Os personagens e suas imagens pertencem aos respectivos titulares de direitos autorais.
 
-## Arquitetura
+---
 
-O projeto é dividido em interface gráfica, backend e banco de dados.
+## Como instalar e executar o projeto
 
-```text
-Java Swing
-    |
-    | HTTP / API REST
-    v
-Spring Boot
-    |
-    | Firebase Admin SDK
-    v
-Cloud Firestore
-```
+### 1. Requisitos
 
-A interface Swing não acessa diretamente as credenciais do Firebase. Toda comunicação com o banco é realizada pelo Spring Boot.
+Para executar o VotoVerso em outro computador, é necessário:
 
-### Organização dos arquivos
-
-```text
-urna-backend/
-├── pom.xml
-├── mvnw.cmd
-├── README.md
-│
-├── scripts/
-│   ├── iniciar-backend.ps1
-│   └── iniciar-interface.ps1
-│
-├── testes/
-│   └── testar-api.ps1
-│
-└── src/
-    ├── main/
-    │   ├── java/br/com/urnacidada/
-    │   │   ├── urna_backend/
-    │   │   │   ├── config/
-    │   │   │   ├── controller/
-    │   │   │   ├── model/
-    │   │   │   ├── repository/
-    │   │   │   └── service/
-    │   │   │
-    │   │   └── urna_swing/
-    │   │       ├── Main.java
-    │   │       ├── UrnaFrame.java
-    │   │       └── UrnaApiClient.java
-    │   │
-    │   └── resources/
-    │       ├── application.properties
-    │       └── imagens/
-    │
-    └── test/java/
-```
-
-## Requisitos para execução
-
-Antes de executar a aplicação, é necessário ter:
-
-- Java JDK 21 instalado.
-- Windows com PowerShell.
-- VS Code com suporte a Java, ou outro ambiente de desenvolvimento Java.
-- Acesso à internet.
-- Projeto Firebase com Cloud Firestore configurado.
+- **Java JDK 21** instalado.
+- **Visual Studio Code**, com a extensão **Extension Pack for Java**, ou outra IDE Java.
+- **Windows com PowerShell**.
+- Conexão com a internet.
+- Projeto Firebase com **Cloud Firestore** configurado.
 - Arquivo JSON de credenciais de uma conta de serviço Firebase.
 
-O projeto utiliza Maven Wrapper, portanto não é necessário instalar o Maven separadamente para executar os comandos `mvnw.cmd`.
+**Não é necessário instalar o Maven manualmente.**
 
-## Instalação e execução
+O projeto utiliza **Maven Wrapper (`mvnw.cmd`)**. As bibliotecas necessárias são baixadas automaticamente conforme as dependências do arquivo `pom.xml`.
 
-### 1. Abrir o projeto
+Em Java, o `pom.xml` cumpre uma função semelhante à do `requirements.txt` utilizado em projetos Python.
 
-Baixe ou clone o repositório e abra a pasta `urna-backend` no VS Code.
+### 2. Baixar e abrir o projeto
 
-No PowerShell, entre na pasta:
+No repositório do GitHub, clique em **Code → Download ZIP**.
+
+Extraia os arquivos e abra a pasta `urna-backend` no VS Code. Essa pasta deve conter o `pom.xml` e o `mvnw.cmd`.
+
+Abra um terminal PowerShell dentro dessa pasta.
+
+### 3. Configurar o Firebase
+
+Acesse o [Firebase Console](https://console.firebase.google.com/).
+
+Em **Configurações do projeto → Contas de serviço**, gere uma chave privada para o Firebase Admin SDK.
+
+Salve o arquivo JSON fora do repositório, em uma pasta privada.
+
+Exemplo:
+
+`C:\chaves\votoverso-firebase.json`
+
+Se a equipe já possui credenciais de teste, utilize-as somente com autorização do responsável.
+
+No terminal PowerShell, configure as variáveis de ambiente:
 
 ```powershell
-cd C:\andrei_dev\urna-backend
-```
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\chaves\votoverso-firebase.json"
 
-Se você extraiu o projeto em outro local, altere o caminho.
+$env:FIREBASE_PROJECT_ID="ID_DO_SEU_PROJETO_FIREBASE"
 
-
-### 2. Configurar as variáveis de ambiente
-
-No terminal PowerShell que será utilizado para iniciar o backend:
-
-```powershell
-$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\Andrei Rodrigues\Downloads\chaves/votoverso-firebase.json"
-
-$env:FIREBASE_PROJECT_ID="urna-backend-db"
-
-$env:URNA_ELEICAO_ID="votoverso-teste-01"
+$env:URNA_ELEICAO_ID="votoverso-avaliacao-01"
 
 $env:URNA_ADMIN_KEY = Read-Host "Digite a senha administrativa"
 ```
 
-**Importante:** ajuste o caminho do JSON para corresponder ao arquivo existente no seu computador.
+Substitua o caminho do JSON e o ID do Firebase pelos valores correspondentes ao seu ambiente.
 
-As variáveis possuem as seguintes funções:
-
-| Variável | Descrição |
-|---|---|
-| `GOOGLE_APPLICATION_CREDENTIALS` | Caminho completo para o JSON privado |
-| `FIREBASE_PROJECT_ID` | Identificador do projeto Firebase |
-| `URNA_ELEICAO_ID` | Identificador da eleição simulada |
-| `URNA_ADMIN_KEY` | Senha administrativa definida pela equipe |
-
-Para verificar se a credencial existe:
+Para verificar se o arquivo de credenciais foi encontrado:
 
 ```powershell
 Test-Path $env:GOOGLE_APPLICATION_CREDENTIALS -PathType Leaf
 ```
 
-O resultado esperado é `True`.
+O resultado deve ser `True`.
 
-**Atenção:** mantenha o mesmo `URNA_ELEICAO_ID` para continuar acessando os dados de uma eleição existente. Uma eleição independente deve usar outro identificador.
+O `URNA_ELEICAO_ID` identifica a eleição. Utilize o mesmo ID para acessar os votos já existentes ou escolha outro ID para uma eleição independente de teste.
 
-### 4. Iniciar o backend Spring Boot
+**Importante:** não publique a chave JSON, a senha administrativa ou arquivos de configuração contendo segredos no GitHub.
 
-No mesmo terminal onde as variáveis foram configuradas, execute:
+As variáveis `$env:` ficam disponíveis somente naquele terminal. Caso ele seja fechado, será necessário configurá-las novamente, mas não é preciso recriar o Firebase.
+
+### 4. Instalar as dependências e executar os testes
+
+Na pasta do projeto, execute:
 
 ```powershell
-.\scripts\iniciar-backend.ps1
+java -version
+
+.\mvnw.cmd clean test
 ```
 
-Alternativamente:
+O Maven fará o download automático das dependências declaradas no `pom.xml` e executará os testes automatizados.
+
+O resultado esperado é:
+
+```text
+BUILD SUCCESS
+```
+
+### 5. Iniciar o backend Spring Boot
+
+No mesmo terminal em que as variáveis do Firebase foram configuradas, execute:
 
 ```powershell
 .\mvnw.cmd spring-boot:run
 ```
 
-O Spring Boot será iniciado na porta 8080.
+Aguarde o Spring Boot iniciar na porta **8080**.
 
-Para verificar:
+Para verificar se a API está funcionando, acesse:
 
-- [Status da aplicação](http://localhost:8080/status)
 - [Estado da eleição](http://localhost:8080/api/eleicao/estado)
 - [Lista de candidatos](http://localhost:8080/api/votacao/candidatos)
 
-**Mantenha o terminal do backend aberto durante a utilização da urna.**
+**Mantenha o terminal do Spring Boot aberto enquanto utilizar a urna.**
 
-### 5. Executar a interface Swing
+### 6. Iniciar a interface Java Swing
 
-Abra outro terminal PowerShell na mesma pasta e execute:
+Com o backend funcionando, abra no VS Code:
+
+`src/main/java/br/com/urnacidada/urna_swing/Main.java`
+
+Clique em **Run Java** para iniciar a interface gráfica.
+
+A janela do **VotoVerso** será aberta.
+
+O Swing se comunica com o backend pelo endereço `http://localhost:8080`. As credenciais Firebase são utilizadas apenas pelo Spring Boot.
+
+---
+
+## Como testar a votação
+
+Para testar uma eleição nova, siga esta sequência:
+
+1. Inicie o backend Spring Boot e abra a interface Swing.
+2. Emita a **zerésima** utilizando a senha administrativa.
+3. Confira se todos os candidatos estão com zero votos.
+4. Clique em **INICIAR SIMULAÇÃO**.
+5. Para deputado federal, digite `7101` (Homem-Aranha) e pressione **CONFIRMA**.
+6. Para presidente, digite `71` (Homem de Ferro, com Thor como vice) e pressione **CONFIRMA**.
+7. Aguarde as telas **GRAVANDO** e **FIM**.
+8. Consulte o estado da eleição pela API ou pelo Firebase.
+
+Uma simulação completa registra **dois votos**, um para deputado federal e outro para presidente.
+
+Também é possível testar os candidatos da DC com os números `7201` e `72`.
+
+### Outros testes
+
+Verifique também:
+
+- **BRANCO:** registrar um voto em branco.
+- **CORRIGE:** apagar uma escolha antes da confirmação.
+- **NULO:** digitar um número sem candidato cadastrado e confirmar.
+- **NOVA SIMULAÇÃO:** iniciar outra sessão.
+- **APURAÇÃO:** encerrar a eleição e conferir o resultado.
+- **EMPATE:** verificar a identificação de candidatos com a mesma votação.
+- **ZERAR TESTES:** iniciar uma nova rodada mantendo o histórico anterior.
+
+### Testar a persistência no Firebase
+
+Após realizar uma votação:
+
+1. Acesse o **Firebase Console → Cloud Firestore → Dados**.
+2. Confira os contadores da eleição.
+3. Encerre o Spring Boot com `Ctrl + C`.
+4. Inicie novamente o servidor, mantendo o mesmo `URNA_ELEICAO_ID`.
+5. Consulte `http://localhost:8080/api/eleicao/estado`.
+
+Os votos registrados anteriormente deverão continuar armazenados no Firestore.
+
+---
+
+## Testes realizados durante o desenvolvimento
+
+Foram realizados testes manuais da votação sequencial, reconhecimento dos candidatos, votos válidos, brancos e nulos, zerésima, persistência no Firebase, apuração, empates, reinício de rodadas e preservação do histórico.
+
+Também foram executados testes automatizados com **JUnit 5 e Maven**.
+
+Comando utilizado:
 
 ```powershell
-.\scripts\iniciar-interface.ps1
+.\mvnw.cmd clean test
 ```
 
-A interface do VotoVerso será aberta.
+Resultado da última execução registrada:
 
-Também é possível executar a classe `Main.java` diretamente pelo VS Code utilizando **Run Java**.
+```text
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0
 
-O segundo terminal não precisa das credenciais Firebase, pois somente o backend acessa o Firestore.
+BUILD SUCCESS
+```
 
-## Como utilizar a urna
+**Resultado:** os 19 testes automatizados passaram, e os testes manuais confirmaram o funcionamento das principais funcionalidades da aplicação.
 
-1. Inicie o Spring Boot e a interface Swing.
-2. Em uma eleição nova, emita a zerésima com a senha administrativa.
-3. Confira se todos os candidatos possuem zero votos.
-4. Clique em INICIAR SIMULAÇÃO.
-5. Escolha o deputado federal digitando quatro números.
-6. Confira a foto, o nome e o partido.
-7. Pressione CONFIRMA.
-8. Escolha o presidente digitando dois números.
-9. Confira o presidente e o vice-presidente.
-10. Pressione CONFIRMA.
-11. Aguarde GRAVANDO e depois FIM.
-12. Utilize NOVA SIMULAÇÃO para permitir outra votação.
+---
 
-Cada simulação completa registra dois votos: um para deputado federal e outro para presidente.
-
-### Encerramento e apuração
-
-Após a conclusão das votações, o responsável pela atividade utiliza a opção de encerramento e informa a senha administrativa.
-
-A apuração apresenta:
-
-- Quantidade de votos de cada candidato.
-- Votos em branco.
-- Votos nulos.
-- Resultado de deputado federal.
-- Resultado da chapa presidencial.
-- Fotos dos vencedores, quando houver vencedor único.
-- Mensagem de empate, quando aplicável.
-
-Depois do encerramento, novas votações são bloqueadas até a abertura de outra rodada.
-
-### Zerésima e reinício dos testes
-
-A zerésima registra os contadores zerados antes da primeira votação da rodada.
-
-O botão **ZERAR TESTES** fica disponível somente quando existem votos registrados. Ele exige confirmação administrativa e permite iniciar outra rodada sem misturar os contadores.
-
-Os resultados anteriores ficam arquivados na subcoleção `rodadas` do Firestore.
-
-
-2. Configurar o Firebase
-
-Acesse o Firebase Console e selecione seu projeto.
-
-Em Configurações do projeto → Contas de serviço, gere uma chave privada para o Firebase Admin SDK.
-
-Guarde o arquivo JSON em uma pasta privada, fora do repositório, por exemplo:
-
-C:\chaves\votoverso-firebase.json
+**Observação:** o VotoVerso utiliza Java Swing e funciona como uma aplicação desktop. O GitHub disponibiliza o código para download, mas não executa a urna como um site no navegador.
